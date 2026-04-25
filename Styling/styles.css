@@ -502,11 +502,10 @@ color: #000000;
     flex-shrink: 0;
 }
 
-/* THIS IS THE FIX: give the bar a proper height so it shows on large screens */
 .bar {
     width: 4px;
-    min-height: 85px;              /* ← tall enough to look connected */
-    background: #fff;              /* default fallback */
+    min-height: 85px;
+    background: #fff; 
 }
 
 /* Coloured bars (same as before) */
@@ -811,11 +810,11 @@ form textarea {
     margin-bottom: 16px;
 }
 
-/* Disable state for Vue contact form button */
+/* Disable state for contact form button */
 .submit-btn:disabled {
-    opacity: 0.35;           /* ← this is what you asked for */
+    opacity: 0.35; 
     cursor: not-allowed;
-    background: #666;        /* slightly darker when disabled */
+    background: #666;
     color: #aaa;
 }
 

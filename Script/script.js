@@ -1,53 +1,73 @@
 // script.js
 
+//  PROJECT MODAL 
+const projects = [
+    { 
+        title: 'WoodWorX', 
+        desc: 'WoodworX is a gamified mobile application that allows woodworkers to gain skills and progress in their woodworking journey in a fun and interactive manner.' 
+    },
+    { 
+        title: 'HaptiNav', 
+        desc: 'Hapti Nav is a navigation application for visually impaired individuals. It links to a smart watch to use the watch as a multi sensory navigation guide.' 
+    },
+    { 
+        title: 'Ilitha', 
+        desc: 'Ilitha Telecommunications required a clean, modern website to showcase their services and communicate professionalism in the telecom sector.' 
+    },
+    { 
+        title: 'Fa Tanimals', 
+        desc: 'Fa Tanimals is a concept design for a brand that sells custom 3D sculptures of pets.' 
+    },
+    { 
+        title: 'Explorations', 
+        desc: 'This is a collection of creative explorations across illustration, 3D, and digital painting. These projects reflect my love for experimentation and visual storytelling.' 
+    }
+];
 
+let currentModal = null;
 
-function showProject(title, description) {
-    alert(title + "\n\n" + description);
+function showProject(index) {
+    if (currentModal) currentModal.remove();
+
+    const project = projects[index];
+
+    const modalHTML = `
+        <div class="project-modal" id="project-modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal()">×</button>
+                <h3>${project.title}</h3>
+                <p>${project.desc}</p>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    currentModal = document.getElementById('project-modal');
+
+    // Close when clicking outside the modal content
+    currentModal.addEventListener('click', function(e) {
+        if (e.target === currentModal) closeModal();
+    });
 }
 
+function closeModal() {
+    if (currentModal) {
+        currentModal.remove();
+        currentModal = null;
+    }
+}
+
+// CONTACT FORM
 document.addEventListener('DOMContentLoaded', function () {
-
-    const projects = document.querySelectorAll('.Project');
-
-    projects.forEach((project, index) => {
-        project.addEventListener('mouseenter', function () {
-
-            // Different content for each project based on position
-            if (index === 0) {
-                showProject('WoodWorX', 'WoodworX is a gamified mobile application that allows woodworkers to gain skills and progress in their woodworking journey in a fun and interactive manner.');
-            } 
-            else if (index === 1) {
-                showProject('HaptiNav', 'Hapti Nav is a navigation application for visually impaired individuals. It links to a smart watch to use the watch as a multi sensory navigation guide.');
-            } 
-            else if (index === 2) {
-                showProject('Ilitha', 'Ilitha Telecommunications required a clean, modern website to showcase their services and communicate professionalism in the telecom sector.');
-            } 
-            else if (index === 3) {
-                showProject('Fa Tanimals', 'Fa Tanimals is a concept design for a brand that sells custom 3D sculptures of pets.');
-            } 
-            else if (index === 4) {
-                showProject('Explorations', 'This is a collection of creative explorations across illustration, 3D, and digital painting. These projects reflect my love for experimentation and visual storytelling.');
-            }
-        });
-    });
-});
-
-//  Contact Form 
-
-document.addEventListener('DOMContentLoaded', function () {
-
     const form = document.getElementById('contact-form');
     if (!form) return;
 
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
     const messageInput = document.getElementById('message');
-
     const nameError = document.getElementById('name-error');
     const emailError = document.getElementById('email-error');
     const messageError = document.getElementById('message-error');
-
     const modal = document.getElementById('success-modal');
     const modalDetails = document.getElementById('modal-details');
     const closeModalBtn = document.getElementById('close-modal');
@@ -96,40 +116,42 @@ document.addEventListener('DOMContentLoaded', function () {
         return true;
     }
 
-    // Live validation while typing
+    // Live validation
     nameInput.addEventListener('input', validateName);
     emailInput.addEventListener('input', validateEmail);
     messageInput.addEventListener('input', validateMessage);
 
     // Form submit
     form.addEventListener('submit', function (e) {
-        e.preventDefault(); // Stop page reload
+        e.preventDefault();
 
         const isNameValid = validateName();
         const isEmailValid = validateEmail();
         const isMessageValid = validateMessage();
 
         if (isNameValid && isEmailValid && isMessageValid) {
-            // Build modal content
             modalDetails.innerHTML = `
                 <strong>Name:</strong> ${nameInput.value}<br>
                 <strong>Email:</strong> ${emailInput.value}<br><br>
                 <strong>Message:</strong><br>
                 ${messageInput.value}
             `;
-
-            modal.classList.add('show'); // Show modal
-            form.reset(); // Clear form
+            modal.style.display = 'flex';
+            form.reset();
         }
     });
 
-    // Close modal
-    closeModalBtn.addEventListener('click', function () {
-        modal.classList.remove('show');
-    });
+    // Close success modal
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+    }
 
-    // Optional: close modal when clicking outside
-    modal.addEventListener('click', function (e) {
-        if (e.target === modal) modal.classList.remove('show');
-    });
+    // Close modal when clicking outside
+    if (modal) {
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) modal.style.display = 'none';
+        });
+    }
 });
