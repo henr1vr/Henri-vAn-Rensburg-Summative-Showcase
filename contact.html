@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get In Touch | Henri van Rensburg</title>
+    <link rel="stylesheet" href="Styling/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="hamburger">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </label>
+        <nav class="nav">
+            <ul class="nav-menu">
+                <li><a href="index.html">My Work</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a class="cta" href="contact.html">Get In Touch</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Get In Touch -->
+    <section id="getintouch">
+        <div class="contact-container">
+            <!-- Left side -->
+            <div class="contact-left">
+                <h2>Get_In_Touch</h2>
+                <p>Open to freelance, full-time, or just a great conversation.</p>
+                <div class="build-box">
+                    Let’s Build<br>Something!
+                </div>
+            </div>
+
+            <!-- Right side - Form -->
+            <div class="contact-right">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label>Name *</label>
+                        <input type="text" id="name" placeholder="Your full name" required>
+                        <span id="name-error" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="email" placeholder="you@email.com" required>
+                        <span id="email-error" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Message *</label>
+                        <textarea id="message" rows="6" placeholder="Tell me about your project..." required></textarea>
+                        <span id="message-error" class="error"></span>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <h3>Thank You!</h3>
+            <p>Your message has been received. Here’s what you sent:</p>
+            <div id="modal-details"></div>
+            <button id="close-modal" class="submit-btn">Close</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2026 Henri van Rensburg</p>
+    </div>
+
+    <script src="Script/script.js" defer></script>
+</body>
+</html>
